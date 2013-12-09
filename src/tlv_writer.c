@@ -41,15 +41,16 @@ int write_system_description_tlv(void *buffer)
 
 int write_management_address_tlv(void *buffer, int if_ip_address, int if_index)
 {
+    // Awful code. Must be fixed.
     char tmp[255];
     tmp[0] = 5;
     tmp[1] = 1;
     *((int *)(tmp + 2)) = if_ip_address;
     tmp[6] = 2;
     *((int *)(tmp + 7)) = htonl(if_index);
-    tmp[10] = 0;
+    tmp[11] = 0;
 
-    return write_lldp_tlv(buffer, TLV_MANAGEMENT_ADDRESS, 11, tmp);
+    return write_lldp_tlv(buffer, TLV_MANAGEMENT_ADDRESS, 12, tmp);
 }
 
 int write_port_description_tlv(void *buffer, const char *if_name)
